@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Faculty Member Interface</title>
+<style>
+    /* Internal CSS */
+    body {
+        font-family: Arial, sans-serif;
+        background-color: #f55858;
+        margin: 0;
+        padding: 20px;
+    }
+    .container {
+        max-width: 800px;
+        margin: 0 auto;
+        background-color: #e7d77e;
+        padding: 20px;
+        border-radius: 8px;
+        box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    }
+    h2 {
+        color: #333;
+    }
+    table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-top: 20px;
+    }
+    th, td {
+        padding: 10px;
+        text-align: left;
+        border-bottom: 1px solid #ddd;
+    }
+    th {
+        background-color: #f2f2f2;
+    }
+    .profile-form {
+        margin-top: 20px;
+    }
+    .profile-form label {
+        display: block;
+        margin-bottom: 5px;
+        color: #333;
+    }
+    .profile-form input[type="text"] {
+        width: calc(100% - 12px);
+        padding: 6px;
+        font-size: 16px;
+        border: 1px solid #ddd;
+        border-radius: 4px;
+        margin-bottom: 10px;
+    }
+    .profile-form input[type="submit"] {
+        background-color: #4CAF50;
+        color: white;
+        border: none;
+        padding: 10px 20px;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 16px;
+        border-radius: 4px;
+        cursor: pointer;
+    }
+    .profile-form input[type="submit"]:hover {
+        background-color: #45a049;
+    }
+</style>
+</head>
+<body>
+    
+<div class="container">
+    <h2>Manage Class List</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>Student Name</th>
+                <th>Photo</th>
+                <th>Contact Information</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>sravani</td>
+                <td><img src="passport.jpg" alt="sravani" width="50"></td>
+                <td>Email: psravs264@gmail.com<br>Phone: 8688140549</td>
+            </tr>
+            <!-- Add more rows dynamically from JavaScript -->
+        </tbody>
+    </table>
+    
+    <h2>Update Profile</h2>
+    <form class="profile-form" id="profileForm">
+        <label for="officeHours">Office Hours:</label>
+        <input type="text" id="officeHours" name="officeHours" placeholder="Enter office hours">
+        
+        <label for="contactEmail">Contact Email:</label>
+        <input type="text" id="contactEmail" name="contactEmail" placeholder="Enter contact email">
+        
+        <label for="phoneNumber">Phone Number:</label>
+        <input type="text" id="phoneNumber" name="phoneNumber" placeholder="Enter phone number">
+        <a href="Administrator Interface.html">Upload profile</a>
+        
+    </form>
+</div>
+
+<script>
+    // JavaScript for profile update functionality
+    document.getElementById('profileForm').addEventListener('submit', function(event) {
+        event.preventDefault();
+        
+        // Fetch values from form
+        let officeHours = document.getElementById('officeHours').value;
+        let contactEmail = document.getElementById('contactEmail').value;
+        let phoneNumber = document.getElementById('phoneNumber').value;
+        
+        // Example: Validate email format (basic check)
+        let emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        if (!emailPattern.test(contactEmail)) {
+            alert('Please enter a valid email address.');
+            return;
+        }
+        
+        // Example: Validate phone number format (basic check)
+        let phonePattern = /^\d{10}$/;
+        if (!phonePattern.test(phoneNumber)) {
+            alert('Please enter a valid 10-digit phone number.');
+            return;
+        }
+        
+        // Simulate saving data to the database (replace with actual backend call)
+        alert('Profile updated successfully!');
+        console.log('Office Hours: ' + officeHours);
+        console.log('Contact Email: ' + contactEmail);
+        console.log('Phone Number: ' + phoneNumber);
+    });
+</script>
+
+</body>
+</html>

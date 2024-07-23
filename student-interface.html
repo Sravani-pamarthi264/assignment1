@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Interface</title>
+    
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #e8f0e9;
+            padding: 20px;
+        }
+        
+
+        .profile {
+            max-width: 600px;
+            background-color: #ede8bd;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+            margin: auto;
+            margin-bottom: 20px;
+        }
+
+        .profile img {
+            max-width: 100px;
+            border-radius: 50%;
+        }
+
+        .academic-info p {
+            margin-bottom: 5px;
+        }
+
+        .search {
+            max-width: 600px;
+            background-color: #d5b1b1;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+            margin: auto;
+        }
+
+        .search input[type="text"] {
+            width: 70%;
+            padding: 10px;
+            margin-bottom: 10px;
+            border: 1px solid #ce7373;
+            border-radius: 5px;
+            box-sizing: border-box;
+        }
+
+        .search button {
+            padding: 10px 20px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .student {
+            border: 1px solid #ccc;
+            padding: 10px;
+            margin-bottom: 10px;
+            border-radius: 5px;
+        }
+
+        .student p {
+            margin-bottom: 5px;
+        }
+        a{
+            text-align: right;
+        }
+    </style>
+</head>
+<body>
+    
+    
+    <div class="profile" id="profileSection">
+        <h2>Personal Information</h2>
+        <div class="personal-info">
+            <p><strong>Name:</strong> sravani</p>
+            <p><strong>Email:</strong> psravs264@gmail.com</p>
+            <p><strong>Phone:</strong> 8688140549</p>
+            
+            <img src="passport.jpg" alt="Profile Photo">
+        </div>
+        <h2>Academic Information</h2>
+        <div class="academic-info">
+            <p><strong>Courses:</strong>java,python</p>
+            <p><strong>Grades:</strong> A, B</p>
+            <p><strong>Attendance:</strong> 90%</p>
+        </div>
+    </div>
+
+    <div class="search">
+        <h2>Search for Other Students</h2>
+        <form id="searchForm">
+            <input type="text" id="searchQuery" placeholder="Search by name, department, or year">
+            <button type="submit">Search</button>
+        </form>
+        <div id="searchResults">
+        
+        </div>
+    </div>
+
+    
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const searchForm = document.getElementById('searchForm');
+            const searchQuery = document.getElementById('searchQuery');
+            const searchResults = document.getElementById('searchResults');
+            const profileSection = document.getElementById('profileSection');
+
+            
+            const students = [
+                { id: 1, name: 'sravani', email: 'psravs264@gmail.com', phone: '1234567890', courses: ['Math', 'Science'], grades: ['A', 'B'], attendance: '90%' },
+                { id: 2, name: 'sreekala', email: 'pskala@gmail.com.com', phone: '1987654321', courses: ['English', 'History'], grades: ['A', 'B'], attendance: '85%' },
+                { id: 3, name: 'vasanth', email: 'kala264@gmail.com', phone: '1234567890', courses: ['java', ' dataScience'], grades: ['A', 'B'], attendance: '70%' },
+                { id: 4, name: 'asha', email: 'asha@gmail.com.com', phone: '1987654321', courses: ['polity', 'History'], grades: ['A', 'B'], attendance: '85%' }];
+
+            
+            function displayProfile(student) {
+                const personalInfo = `<p><strong>Name:</strong> ${student.name}</p>
+                                      <p><strong>Email:</strong> ${student.email}</p>
+                                      <p><strong>Phone:</strong> ${student.phone}</p>`;
+                const academicInfo = `
+                    <p><strong>Courses:</strong> ${student.courses.join(', ')}</p>
+                    <p><strong>Grades:</strong> ${student.grades.join(', ')}</p>
+                    <p><strong>Attendance:</strong> ${student.attendance}</p>`;
+                profileSection.innerHTML = `
+                    <h2>Personal Information</h2>
+                    <div class="personal-info">
+                        ${personalInfo}
+                    
+                        <img src="placeholder" alt="Profile Photo">
+                    </div>
+                    <h2>Academic Information</h2>
+                    <div class="academic-info">
+                        ${academicInfo}
+                    </div>`;
+            }
+
+        
+            searchForm.addEventListener('submit', function(event) {
+                event.preventDefault();
+                const query = searchQuery.value.trim().toLowerCase();
+
+            
+                const results = students.filter(student =>
+                    student.name.toLowerCase().includes(query) ||
+                    student.courses.some(course => course.toLowerCase().includes(query))
+                );
+
+            
+                displaySearchResults(results);
+            });
+
+            
+            function displaySearchResults(results) {
+                searchResults.innerHTML = ''; 
+
+                results.forEach(student => {
+                    const studentDiv = document.createElement('div');
+                    studentDiv.classList.add('student');
+
+                    const name = document.createElement('p');
+                    name.textContent = `Name: ${student.name}`;
+
+                    const email = document.createElement('p');
+                    email.textContent = `Email: ${student.email}`;
+                    studentDiv.appendChild(name);
+                    studentDiv.appendChild(email);
+                  searchResults.appendChild(studentDiv);
+                });
+            }
+        });
+    </script>
+    <a href="Faculty Member Interface.html">NEXT</a>
+</body>
+</html>
